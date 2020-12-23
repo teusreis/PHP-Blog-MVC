@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: montserrat;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.navbar {
+  width: 100%;
+  background-color: #0082e6;
+}
+
+.navbar .container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  height: 50px;
+}
+
+@media only screen and (min-width: 600px) {
+  .navbar .container {
+    grid-template-columns: auto 1fr;
+  }
+}
+
+.navbar .logo {
+  margin-left: 5px;
+  color: white;
+  font-size: 30px;
+}
+
+.navbar nav {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: -80%;
+  top: 50px;
+  background-color: #2c3e50;
+  width: 80%;
+  height: 100vh;
+  transition: left 0.5s ease;
+}
+
+@media only screen and (min-width: 600px) {
+  .navbar nav {
+    flex-direction: row;
+    position: relative;
+    justify-content: flex-end;
+    width: 100%;
+    height: auto;
+    left: auto;
+    top: auto;
+    background-color: #0082e6;
+  }
+}
+
+.navbar nav div {
+  display: block;
+  margin: 20px auto;
+  width: fit-content;
+}
+
+@media only screen and (min-width: 600px) {
+  .navbar nav div {
+    margin: auto 5px;
+  }
+}
+
+.navbar nav a {
+  text-decoration: none;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 20%;
+}
+
+.navbar nav a:hover {
+  background: #0082e6;
+}
+
+.navbar .active {
+  left: 0% !important;
+}
+
+.navbar .hamburguer {
+  font-size: 20px;
+  width: fit-content;
+  margin: auto 15px auto auto;
+}
+
+.navbar .hamburguer i {
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 600px) {
+  .navbar .hamburguer {
+    display: none;
+  }
+}
+/*# sourceMappingURL=main.css.map */

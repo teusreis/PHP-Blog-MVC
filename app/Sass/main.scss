@@ -1,0 +1,86 @@
+@import "autoImport";
+
+.navbar {
+    width: 100%;
+    background-color: getColor(main);
+    
+    .container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        height: 50px;
+        @include bigScreenNav{
+            grid-template-columns: auto 1fr;
+        }
+    }
+
+    .logo {
+        margin-left: 5px;
+        color: white;
+        font-size: 30px;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        left: -80%;
+        top: 50px;
+        background-color: rgba(44, 62, 80, 1);
+        width: 80%;
+        height: 100vh;
+        transition: left 0.5s ease;
+        
+        @include bigScreenNav {
+            flex-direction: row;
+            position: relative;
+            justify-content: flex-end;
+            width: 100%;
+            height: auto;
+            left: auto;
+            top: auto;
+            background-color: getColor(main);
+        }
+
+        div {
+            display: block;
+            margin: 20px auto;
+            width: fit-content;
+
+            @include bigScreenNav{
+                margin: auto 5px;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            padding: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 20%;
+
+            &:hover{
+                background: #0082e6;
+            }
+        }
+    }
+
+    .active {
+        left: 0% !important;
+    }
+
+    .hamburguer {   
+        font-size: 20px;
+        width: fit-content;
+        margin: auto 15px auto auto;
+        
+        i {
+            cursor: pointer
+        }
+
+        @include bigScreenNav {
+            display: none;
+        }
+    }
+}

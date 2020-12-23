@@ -1,16 +1,46 @@
 <?php
 
-namespace App\Controller;
+namespace App\Library;
 
 class Controller
 {
-    protected function render(string $view, array $param = []): void
+    protected string $layout = "main";
+
+    public function __construct()
     {
-        // render a view...
+    }
+
+    protected function render(string $view, array $params = [])
+    {
+        if (isset($this->layout) && $this->layout !== "") {
+            $layout = $this->renderLayout($params);
+            $viewContent = $this->renderOnlyView($view, $params);
+            echo str_replace("{{content}}", $viewContent, $layout);
+        } else {
+            $view = $this->renderOnlyView($view);
+            echo $view;
+        }
+        //require __DIR__ . "./../view/" . $view;
     }
 
     protected function redirect(): void
     {
         // redirect user!
+    }
+
+    private function renderOnlyView(string $view, array $params = [])
+    {
+        extract($params);
+        ob_start();
+        include __DIR__ . "./../View/" . $view;
+        return ob_get_clean();
+    }
+
+    private function renderLayout(array $params = [])
+    {
+        extract($params);
+        ob_start();
+        include __DIR__ . "./../View/layout/main.php";
+        return ob_get_clean();
     }
 }
