@@ -1,7 +1,19 @@
 $colors: (
-    main: #0082e6,
+    main: #348acc,
+    letter: #ffffff,
+);
+
+$spacing: (
+    mainMargin: 10px,
+    secondMargin: 5px,
+    paragraphp: 20px,
+    letter: 1.6,
 );
 
 @function getColor($name){
-    @return map-get($colors, $name)
-}
+    @return map-get($colors, $name);
+};
+
+@function getSpace($name){
+    @return map-get($spacing, $name);
+};

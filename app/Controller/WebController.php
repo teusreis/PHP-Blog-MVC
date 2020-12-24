@@ -9,6 +9,8 @@ class WebController extends Controller
 
     public function index()
     {
-        $this->render("index.php");
+        $this->render("index.php", [
+            "css" => "indexPage",
+        ]);
     }
 }

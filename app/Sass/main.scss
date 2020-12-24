@@ -16,7 +16,7 @@
 
     .logo {
         margin-left: 5px;
-        color: white;
+        color: getColor(letter);
         font-size: 30px;
     }
 
@@ -53,7 +53,6 @@
         }
 
         a {
-            text-decoration: none;
             padding: 10px;
             color: white;
             font-weight: bold;

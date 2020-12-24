@@ -14,9 +14,19 @@ body {
   margin: auto;
 }
 
+img {
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+}
+
 .navbar {
   width: 100%;
-  background-color: #0082e6;
+  background-color: #348acc;
 }
 
 .navbar .container {
@@ -34,7 +44,7 @@ body {
 
 .navbar .logo {
   margin-left: 5px;
-  color: white;
+  color: #ffffff;
   font-size: 30px;
 }
 
@@ -59,7 +69,7 @@ body {
     height: auto;
     left: auto;
     top: auto;
-    background-color: #0082e6;
+    background-color: #348acc;
   }
 }
 
@@ -76,7 +86,6 @@ body {
 }
 
 .navbar nav a {
-  text-decoration: none;
   padding: 10px;
   color: white;
   font-weight: bold;
