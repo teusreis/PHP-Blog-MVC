@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #f0f0f0;
+  font-family: montserrat;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+img {
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.error {
+  color: #ff1b1b;
+}
+
+.error input {
+  border: 1px solid red;
+}
+
+input {
+  padding: 5px;
+}
+
+.success {
+  color: greenyellow;
+}
+
+.success input {
+  padding: 5px;
+  border: 1px solid greenyellow;
+}
+
+.loginCard {
+  margin: 20px auto;
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #348acc;
+}
+
+h3 {
+  color: #348acc;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  padding: 5px;
+}
+
+.btn-submit {
+  display: block;
+  width: 100%;
+  font-size: 1em;
+  font-weight: 200;
+  padding: 5px;
+  background: #348acc;
+  color: white;
+  font-weight: bold;
+  border: none;
+  transition: all 0.5s ease;
+  box-shadow: none;
+}
+
+.btn-submit:hover {
+  background: #296fa4;
+}
+
+.newAccount {
+  text-align: center;
+  margin-top: 10px;
+}
+/*# sourceMappingURL=login.css.map */

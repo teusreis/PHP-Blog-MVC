@@ -23,9 +23,11 @@ class Controller
         //require __DIR__ . "./../view/" . $view;
     }
 
-    protected function redirect(): void
+    protected function redirect(string $route = ""): void
     {
-        // redirect user!
+        if($route == "" || $route == "/") $route = $_ENV['DOMAIN'];
+        header('Location: '. $route .'');
+        die();
     }
 
     private function renderOnlyView(string $view, array $params = [])
@@ -40,7 +42,17 @@ class Controller
     {
         extract($params);
         ob_start();
-        include __DIR__ . "./../View/layout/main.php";
+        include __DIR__ . "./../View/layout/" . $this->layout . ".php";
         return ob_get_clean();
+    }
+
+    protected function serialize(array $data): array
+    {
+        $body = [];
+        foreach ($data as $key => $value) {
+            $body[$key] = filter_var($value, FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+        
+        return $body;
     }
 }

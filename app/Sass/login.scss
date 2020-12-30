@@ -1,0 +1,51 @@
+@import "autoImport";
+
+.loginCard{
+    margin: 20px auto;
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid getColor(main);
+}
+
+h3 {
+    color: getColor(main);
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto;
+
+    label{
+        margin-bottom: 5px;
+    }
+
+    input {
+        padding: 5px;
+    }
+
+}
+
+.btn-submit {
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    font-weight: 200;
+    padding: 5px;
+    background: getColor(main);
+    color: white;
+    font-weight: bold;
+    border: none;
+    transition: all 0.5s ease;
+    box-shadow: none;
+    
+    &:hover {
+        background: darken(getColor(main), 10%);
+    }
+}
+
+.newAccount {
+    text-align: center;
+    margin-top: 10px;
+}

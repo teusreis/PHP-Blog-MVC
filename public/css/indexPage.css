@@ -6,6 +6,7 @@
 }
 
 body {
+  background: #f0f0f0;
   font-family: montserrat;
 }
 
@@ -22,6 +23,27 @@ img {
 
 a {
   text-decoration: none;
+}
+
+.error {
+  color: #ff1b1b;
+}
+
+.error input {
+  border: 1px solid red;
+}
+
+input {
+  padding: 5px;
+}
+
+.success {
+  color: greenyellow;
+}
+
+.success input {
+  padding: 5px;
+  border: 1px solid greenyellow;
 }
 
 header {

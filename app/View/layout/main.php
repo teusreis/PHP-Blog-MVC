@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/<?= $css ?? "none" ?>.css">
-    <title><?= $title ?? "Home";?></title>
+    <title><?= $title ?? "Home"; ?></title>
 </head>
 
 <body>
@@ -19,10 +19,18 @@
                 Blog
             </h1>
             <nav class="">
-                <div><a href="#">Home</a></div>
+                <div><a href="/">Home</a></div>
                 <div><a href="#">About</a></div>
-                <div><a class="login" href="#">Login</a></div>
-                <div><a class="register" href="#">Register</a></div>
+                <?php if (isset($_SESSION['user'])) : ?>
+
+                    <div><a href="#">New Post</a></div>
+                    <div><a href="#">My Post</a></div>
+                    <div><a class="login" href="logout">Logout</a></div>
+
+                <?php else : ?>
+                    <div><a class="login" href="login">Login</a></div>
+                    <div><a class="register" href="register">Register</a></div>
+                <?php endif; ?>
             </nav>
             <div class="hamburguer">
                 <i class="fas fa-bars"></i>

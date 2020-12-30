@@ -7,7 +7,7 @@ use PDO;
 
 class Db
 {
-    private PDO $instace;
+    private static PDO $instace;
 
     public static function connect()
     {

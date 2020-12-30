@@ -6,6 +6,7 @@
 }
 
 body {
+    background: getColor(background);
     font-family: montserrat;
 }
 
@@ -22,4 +23,25 @@ img {
 
 a {
     text-decoration: none;
+}
+
+.error {
+    color: #ff1b1b;
+
+    input {
+        border: 1px solid red;
+    }
+}
+
+input {
+    padding: 5px;
+}
+
+.success {
+    color: greenyellow;
+    
+    input{
+        padding: 5px;
+        border: 1px solid greenyellow;
+    }
 }

@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 use Dotenv\Dotenv;
 use CoffeeCode\Router\Router;
 
@@ -14,7 +16,22 @@ $router->namespace("App\Controller");
 $router->group("/");
 $router->get("/", "WebController::index");
 
+$router->post("/login", "UserController::login");
+$router->get("/login", "UserController::login");
+
+$router->get("/register", "UserController::register");
+$router->post("/register", "UserController::register");
+
+$router->get("/logout", "UserController::logout");
+
+$router->get("/nicknakeExist", "UserController::nickname");
+$router->get("/emailExist", "UserController::email");
+
 /**
  * This method executes the routes
  */
 $router->dispatch();
+
+if($router->error()){
+    var_dump($router->error());
+}
