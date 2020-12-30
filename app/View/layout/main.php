@@ -21,7 +21,7 @@
             <nav class="">
                 <div><a href="/">Home</a></div>
                 <div><a href="#">About</a></div>
-                <?php if (isset($_SESSION['user'])) : ?>
+                <?php if (isLogin()) : ?>
 
                     <div><a href="#">New Post</a></div>
                     <div><a href="#">My Post</a></div>

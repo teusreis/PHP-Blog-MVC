@@ -13,16 +13,21 @@ $router = new Router($_ENV["DOMAIN"], "::");
 
 $router->namespace("App\Controller");
 
+/**
+* Web Routes
+*/
 $router->group("/");
 $router->get("/", "WebController::index");
 
-$router->post("/login", "UserController::login");
+/**
+* User Routes
+*/
 $router->get("/login", "UserController::login");
+$router->post("/login", "UserController::login");
+$router->get("/logout", "UserController::logout");
 
 $router->get("/register", "UserController::register");
 $router->post("/register", "UserController::register");
-
-$router->get("/logout", "UserController::logout");
 
 $router->get("/nicknakeExist", "UserController::nickname");
 $router->get("/emailExist", "UserController::email");

@@ -41,7 +41,7 @@ class UserController extends Controller
     }
 
     public function register()
-    {   
+    {
         if (isset($_POST['user'])) {
 
             extract($_POST['user']);
@@ -65,7 +65,7 @@ class UserController extends Controller
     public function nickname()
     {
         $data = [];
-        if($this->user->nicknameExist($_GET["nickname"])){
+        if ($this->user->nicknameExist($_GET["nickname"])) {
             $data['exist'] = true;
             $data['message'] = "This nickname have alredy been taken by another user!";
         } else {
@@ -78,7 +78,7 @@ class UserController extends Controller
     public function email()
     {
         $data = [];
-        if($this->user->emailExist($_GET["email"])){
+        if ($this->user->emailExist($_GET["email"])) {
             $data['exist'] = true;
             $data['message'] = "This email have alredy been taken by another user!";
         } else {
@@ -87,12 +87,4 @@ class UserController extends Controller
 
         echo json_encode($data);
     }
-}
-
-function dd($data)
-{
-    echo "<pre>";
-    var_dump($data);
-    echo "</pre>";
-    die();
 }
