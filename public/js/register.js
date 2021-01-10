@@ -1,3 +1,5 @@
+import { nicknakeExist, emailExist } from "./_async.js";
+
 const form = document.querySelector("form#register");
 const username = form.name;
 const lastName = form.lastName;
@@ -41,9 +43,7 @@ form.addEventListener("submit", (event) => {
     error.push(checkPassword());
     error.push(checkConfirmPassword());
 
-    console.log(typeof error);
-
-    if(error.includes(false)) {
+    if (error.includes(false)) {
         alert("Ops! There's some errors!");
     } else {
         form.submit();
@@ -159,12 +159,12 @@ function checkPassword() {
         password.parentNode.classList.add("error");
         password.parentNode.querySelector(".errorMenagem").textContent = "password is required!";
         return false;
-    } else if(password.value.length < 6) {
+    } else if (password.value.length < 6) {
         password.parentNode.classList.remove("success");
         password.parentNode.classList.add("error");
         password.parentNode.querySelector(".errorMenagem").textContent = "Your password is not strong enough!";
         return false;
-    } else if(password.value !== confirmPassword.value) {
+    } else if (password.value !== confirmPassword.value) {
         password.parentNode.classList.remove("success");
         password.parentNode.classList.add("error");
         password.parentNode.querySelector(".errorMenagem").textContent = "Your password does not metch with confirm password!";
@@ -188,24 +188,4 @@ function checkConfirmPassword() {
         checkPassword();
         return true;
     }
-}
-
-const nicknakeExist = async (nickname) => {
-
-    let query = "?nickname=" + nickname;
-    let url = "http://localhost/blog/public/nicknakeExist";
-    const response = await fetch(url + query);
-    const data = await response.json();
-
-    return data;
-}
-
-const emailExist = async (email) => {
-
-    let query = "?email=" + email;
-    let url = "http://localhost/blog/public/emailExist";
-    const response = await fetch(url + query);
-    const data = await response.json();
-
-    return data;
 }

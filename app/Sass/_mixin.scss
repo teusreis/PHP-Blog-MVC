@@ -18,3 +18,74 @@ $spacing: (
 @function getSpace($name){
     @return map-get($spacing, $name);
 };
+
+@mixin actionBtn {
+    button {
+        color: white;
+        border-radius: 5px;
+        padding: 8px;
+        display: inline-block;
+        transition: all 0.4s;
+    }
+    
+    .actionBtn {
+    
+        margin: 5px auto;
+        width: 100%;
+    
+        @include tabletScreen {
+            grid-column: 1/13;
+        }
+    
+        .deletePost {
+            background: #f15e5e;;
+            border: #f15e5e;
+    
+            &:hover {
+                background: #ee3535;
+            }
+        }
+    
+        .editPost {
+            background: #3a3afa;
+            border: #3a3afa;
+    
+            &:hover {
+                background: #2c2cff;
+            }
+        }
+    }
+}
+
+@mixin pagination {
+    
+    .paginator {
+        width: fit-content;
+        list-style: none;
+        padding: 0;
+        margin: 30px auto;
+
+        &_item {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 4px 12px;
+            background: getColor(main);
+            color: #fff;
+            text-decoration: none;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            transition: all .3s;
+
+            &:hover{
+                background: darken(getColor(main), 20);
+            }
+        }
+        
+        &_active,
+        &_active:hover {
+            background: #cccccc;
+        }
+    }
+    
+}

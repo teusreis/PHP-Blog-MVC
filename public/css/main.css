@@ -33,8 +33,18 @@ a {
   border: 1px solid red;
 }
 
-input {
-  padding: 5px;
+.error textarea {
+  border: 1px solid red;
+}
+
+input, textarea {
+  padding: 7px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+label {
+  margin-bottom: 5px;
 }
 
 .success {
@@ -43,6 +53,10 @@ input {
 
 .success input {
   padding: 5px;
+  border: 1px solid greenyellow;
+}
+
+.success textarea {
   border: 1px solid greenyellow;
 }
 

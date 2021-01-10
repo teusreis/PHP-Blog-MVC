@@ -8,9 +8,10 @@
         }
     ],
     "require": {
-        "php": ">=7.4",
+        "php": ">=7.4|^8.0",
         "coffeecode/router": "^1.0",
-        "vlucas/phpdotenv": "^5.2"
+        "vlucas/phpdotenv": "^5.2",
+        "coffeecode/paginator": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -19,5 +20,8 @@
         "files": [
             "app/helper/helper.php"
         ]
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.13"
     }
 }

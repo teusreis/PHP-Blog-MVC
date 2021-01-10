@@ -2,8 +2,9 @@
 
 namespace App\Model;
 
-use App\Library\Model;
+use PDO;
 use Exception;
+use App\Library\Model;
 
 class User extends Model
 {
@@ -258,5 +259,32 @@ class User extends Model
         $nextId = $resul->fetch()->id;
 
         return $nextId;
+    }
+
+    public function posts(int $offset = null, int $limit = null): array
+    {
+        $offset = $offset ?? 0;
+        $limit = $limit ?? 100000000000000000;
+
+        $sql = "SELECT p.id, p.user_id, p.title, p.description, DATE(p.created_at) as created_at, DATE(p.updated_at) updated_at, CONCAT(u.name, ' ', u.lastName) as author FROM users as u
+                JOIN posts as p
+                ON u.id = p.user_id
+                WHERE u.id = :id
+                ORDER By p.created_at DESC
+                LiMIT :offset, :limit";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->bindParam(":offset", $offset, PDO::PARAM_INT);
+        $stmt->bindParam(":limit", $limit, PDO::PARAM_INT);
+        $stmt->bindParam(":id", $_SESSION['user']['id']);
+
+        $success = $stmt->execute();
+
+        if ($success) {
+            return $stmt->fetchAll();
+        } else {
+            throw new Exception("Algo de errado não está certo!");
+        }
     }
 }

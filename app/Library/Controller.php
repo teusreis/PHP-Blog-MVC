@@ -23,10 +23,15 @@ class Controller
         //require __DIR__ . "./../view/" . $view;
     }
 
-    protected function redirect(string $route = ""): void
+    protected function redirect(string $route = "", array $flags = []): void
     {
-        if($route == "" || $route == "/") $route = $_ENV['DOMAIN'];
-        header('Location: '. $route .'');
+        if(!empty($flags)){
+            foreach($flags as $flag => $value){
+                $_SESSION[$flag] = $value;
+            }
+        }
+        if($route == "/") $route = "";
+        header('Location: '. url($route) .'');
         die();
     }
 

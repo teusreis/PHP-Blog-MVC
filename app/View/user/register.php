@@ -47,4 +47,4 @@
     </form>
 </div>
 
-<script src="./js/register.js"></script>
+<script type="module" src="<?= loadJs("register.js") ?>"></script>

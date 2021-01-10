@@ -60,17 +60,17 @@ label {
   border: 1px solid greenyellow;
 }
 
-.loginCard {
-  margin: 20px auto;
-  width: 100%;
-  max-width: 400px;
-  padding: 10px;
-  background-color: white;
-  border: 1px solid #348acc;
+.title {
+  text-align: center;
+  margin: 10px auto;
+  color: #348acc;
 }
 
-h3 {
-  color: #348acc;
+form {
+  padding: 1em;
+  margin: auto;
+  width: 100%;
+  max-width: 600px;
 }
 
 .form-group {
@@ -84,29 +84,37 @@ h3 {
 }
 
 .form-group input {
-  padding: 5px;
+  border-radius: 5px;
 }
 
-.btn-submit {
-  display: block;
-  width: 100%;
+.btnContainer {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.btnContainer button {
+  padding: 10px 20px;
   font-size: 1em;
-  font-weight: 200;
-  padding: 5px;
-  background: #348acc;
-  color: white;
-  font-weight: bold;
   border: none;
-  transition: all 0.5s ease;
-  box-shadow: none;
+  border-radius: 5px;
 }
 
-.btn-submit:hover {
-  background: #296fa4;
+.btnContainer .btnExPara {
+  color: red;
 }
 
-.newAccount {
-  text-align: center;
-  margin-top: 10px;
+.btnContainer .btnNewPara {
+  color: green;
 }
-/*# sourceMappingURL=login.css.map */
+
+.btnContainer .submitWapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+#btnSubmit {
+  background-color: #348acc;
+  color: white;
+}
+/*# sourceMappingURL=newPost.css.map */

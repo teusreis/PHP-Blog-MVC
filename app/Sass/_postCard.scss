@@ -1,0 +1,56 @@
+.cardContainer {
+    display: flex column;
+    // grid-template-columns: repeat(1, 1fr);
+
+    .post{
+        margin: 15px 5px;
+        padding: 1em;
+        border-bottom: 1px solid rgb(155, 155, 155);
+
+        @include tabletScreen {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-gap: 1em;
+        }
+
+        &_banner{
+            width: fit-content;
+            margin: 10px 0;
+
+            @include tabletScreen {
+                grid-column: 1/3;
+            }
+        }
+
+        h3 {
+            font-weight: 400px;
+            font-size: 1.3em;
+            margin: 10px 0;
+        }
+
+        &_info {
+            @include tabletScreen {
+                grid-column: 3/13;
+            }
+        }
+
+        .postDescript {
+            display: block;
+            line-height: getSpace(letter);
+        }
+
+        .moreInfo{
+            display: grid;
+            margin-top: getSpace(mainMargin) + 5;
+            grid-template-columns: auto auto 1fr;
+
+            .date{
+                margin-left: 10px;
+            }
+            
+            .readMore {
+                text-align: right;
+            }
+        }
+    }
+}

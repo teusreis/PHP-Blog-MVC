@@ -2,7 +2,7 @@
     <h3>Login</h3>
     <form action="login" method="post" name="login">
 
-        <?php if(isset($error['login'])): ?>
+        <?php if (isset($error['login'])) : ?>
             <div class="error" style="text-align: center;">
                 <?= $error["login"]; ?>
             </div>
@@ -19,7 +19,7 @@
             <label for="password">Password</label>
             <input type="password" name="login[password]" id="password">
             <div class="errorMenagem">
-    
+
             </div>
         </div>
         <button class="btn-submit" type="submit">Login</button>
@@ -29,4 +29,4 @@
     </div>
 </div>
 
-<script src="./js/login.js"></script>
+<script src="<?= loadJs("login.js") ?>"></script>

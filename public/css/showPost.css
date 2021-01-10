@@ -1,0 +1,179 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #f0f0f0;
+  font-family: montserrat;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+img {
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.error {
+  color: #ff1b1b;
+}
+
+.error input {
+  border: 1px solid red;
+}
+
+.error textarea {
+  border: 1px solid red;
+}
+
+input, textarea {
+  padding: 7px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+.success {
+  color: greenyellow;
+}
+
+.success input {
+  padding: 5px;
+  border: 1px solid greenyellow;
+}
+
+.success textarea {
+  border: 1px solid greenyellow;
+}
+
+section.main {
+  padding: 10px;
+  margin: auto;
+  max-width: 700px;
+}
+
+section.main .info {
+  margin: 5px auto;
+}
+
+section.main .info div {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+section.main h2 {
+  margin: 20px auto;
+}
+
+section.main p {
+  line-height: 1.5em;
+  margin: 20px auto;
+  font-family: 'Open Sans', sans-serif;
+}
+
+section.main .description {
+  color: #979797;
+}
+
+button {
+  color: white;
+  border-radius: 5px;
+  padding: 8px;
+  display: inline-block;
+  transition: all 0.4s;
+}
+
+.actionBtn {
+  margin: 5px auto;
+  width: 100%;
+}
+
+@media only screen and (min-width: 750px) {
+  .actionBtn {
+    grid-column: 1/13;
+  }
+}
+
+.actionBtn .deletePost {
+  background: #f15e5e;
+  border: #f15e5e;
+}
+
+.actionBtn .deletePost:hover {
+  background: #ee3535;
+}
+
+.actionBtn .editPost {
+  background: #3a3afa;
+  border: #3a3afa;
+}
+
+.actionBtn .editPost:hover {
+  background: #2c2cff;
+}
+
+.modal {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.438);
+  font-family: 'Varela Round', sans-serif;
+}
+
+.modal-card {
+  margin: 20px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-gap: 25px;
+  width: fit-content;
+  background: white;
+  border-radius: 5px;
+}
+
+.modal-card h1 {
+  font-size: 60px;
+  color: #ffff32;
+}
+
+.modal-card h3 {
+  text-align: center;
+  font-size: 26px;
+}
+
+.modal-card #cancel {
+  background: #c1c1c1;
+  border: #c1c1c1;
+}
+
+.modal-card #cancel:hover {
+  background: #a8a8a8;
+}
+
+.modal-card #delete {
+  background: #f15e5e;
+  border: #f15e5e;
+}
+
+.modal-card #delete:hover {
+  background: #ee3535;
+}
+/*# sourceMappingURL=showPost.css.map */

@@ -31,10 +31,20 @@ a {
     input {
         border: 1px solid red;
     }
+
+    textarea {
+        border: 1px solid red;
+    }
 }
 
-input {
-    padding: 5px;
+input, textarea {
+    padding: 7px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+label {
+    margin-bottom: 5px;
 }
 
 .success {
@@ -42,6 +52,10 @@ input {
     
     input{
         padding: 5px;
+        border: 1px solid greenyellow;
+    }
+
+    textarea {
         border: 1px solid greenyellow;
     }
 }

@@ -17,21 +17,25 @@ class Model
         $this->pdo = Db::connect();
     }
 
-    public function find($value, $primaryKey = "id")
+    public function findByPk($search, $primaryKey = "id"): object
     {
-        $sql = "SELECT * from $this->table where :primaryKey = :value LIMIT 1";
+        $sql = "SELECT * from $this->table where $primaryKey = :value LIMIT 1";
         $stmt = $this->pdo->prepare($sql);
-
-        $bool = $stmt->execute([
-            ":primaryKey" => $primaryKey,
-            ":value" => $value
+        $stmt->execute([
+            ":value" => $search
         ]);
 
-        if($bool){
-            return $stmt->fetch();
-        } else {
-            return false;
-        }
+        return $stmt->fetch();
+    }
 
+    public function delete($id): bool
+    {
+
+        $sql = "DELETE FROM $this->table WHERE id = :id LIMIT 1";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+
+        return $stmt->execute();
     }
 }
