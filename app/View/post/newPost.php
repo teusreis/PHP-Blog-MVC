@@ -1,14 +1,23 @@
 <h2 class="title">New Post</h2>
 
-<form id="post" action="<?= isset($post) ? url("post/edit") : url("post/create") ?>" method="post">
+<form id="post" action="<?= isset($post) ? url("post/edit") : url("post/create") ?>" method="POST" enctype="multipart/form-data">
 
     <?php if (isset($id)) : ?>
         <input type="hidden" name="id" value="<?= $id ?>">
     <?php endif ?>
 
     <div class="form-group">
+        <label for="banner">Post's img</label>
+        <input type="file" name="banner" id="banner" value="<?= $post->photoPath ?? "" ?>">
+        <div class="errorMenagem"></div>
+        <?php if (isset($post)) : ?>
+            <input type="hidden" name="post[oldBanner]" value="<?= $post->photoPath ?>">
+        <?php endif ?>
+    </div>
+
+    <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" name="post[title]" name="id" id="title" value="<?= $post->title ?? "" ?>">
+        <input type="text" name="post[title]" id="title" value="<?= $post->title ?? "" ?>">
         <div class="errorMenagem"></div>
     </div>
     <div class="form-group">

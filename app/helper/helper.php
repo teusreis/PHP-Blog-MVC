@@ -54,5 +54,5 @@ function loadJs($fileName): string
 
 function loadImg($img)
 {
-    return $_ENV['DOMAIN'] . "img/$img";
+    return $_ENV['DOMAIN'] . "$img";
 }

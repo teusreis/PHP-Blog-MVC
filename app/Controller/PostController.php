@@ -6,6 +6,7 @@ use App\Model\Post;
 use App\Model\User;
 use App\Library\Controller;
 use CoffeeCode\Paginator\Paginator;
+use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
@@ -69,7 +70,7 @@ class PostController extends Controller
         $post = $this->post->find($data['id']);
 
         $post->paragraph = explode("{{paragraphEnd}}", $post->paragraph);
-        
+
         $this->render("post/show.php", [
             "post" => $post,
             "css" => "showPost"
@@ -82,7 +83,7 @@ class PostController extends Controller
             $this->redirect("login");
             http_response_code(403);
         }
-        
+
         if (isset($_POST['post'])) {
             $data = $this->serialize($_POST['post']);
             $data['paragraph'] = $this->serialize($_POST['post']['paragraph']);
@@ -91,7 +92,8 @@ class PostController extends Controller
 
             $this->post->setTitle($title)
                 ->setDescription($description)
-                ->setParagraph($paragraph);
+                ->setParagraph($paragraph)
+                ->setPhotoPath($_FILES);
 
             if ($this->post->save()) {
                 $this->redirect("post/myPost");
@@ -109,6 +111,7 @@ class PostController extends Controller
 
         if (isset($_POST['post'])) {
 
+
             $post = $this->post->findByPk($_POST["id"]);
 
             if (!canModify($post->user_id)) {
@@ -122,7 +125,8 @@ class PostController extends Controller
 
             $this->post->setTitle($title)
                 ->setDescription($description)
-                ->setParagraph($paragraph);
+                ->setParagraph($paragraph)
+                ->setPhotoPath($_FILES, $oldBanner);
 
             if ($this->post->update($_POST['id'])) {
                 $this->redirect("post/myPost");

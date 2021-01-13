@@ -12,7 +12,7 @@
 <div class="cardContainer">
 
     <h2>My posts</h2>
-    
+
     <?php if (count($posts) >= 1) : ?>
 
         <div class="page">
@@ -23,7 +23,7 @@
 
             <div class="post">
                 <div class="post_banner">
-                    <img src="<?= loadImg("userImg/bannerTest.png") ?>" alt="">
+                    <img src="<?= $post->hasPhoto ? loadImg($post->photoPath) : loadImg("img/userImg/bannerTest.png") ?>" alt="">
                 </div>
                 <div class="post_info">
                     <h3><?= $post->title ?></h3>

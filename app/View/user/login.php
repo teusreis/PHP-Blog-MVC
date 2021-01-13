@@ -3,7 +3,7 @@
     <form action="login" method="post" name="login">
 
         <?php if (isset($error['login'])) : ?>
-            <div class="error" style="text-align: center;">
+            <div class="error">
                 <?= $error["login"]; ?>
             </div>
         <?php endif ?>

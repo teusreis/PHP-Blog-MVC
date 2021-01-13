@@ -28,7 +28,7 @@
     </p>
     
     <div class="imgCard">
-        <img src="<?= loadImg("userImg/bannerTest.png"); ?>" alt="">
+        <img src="<?= loadImg($post->photoPath ?? "img/userImg/bannerTest.png"); ?>" alt="">
     </div>
 
     <?php foreach ($post->paragraph as $para) : ?>

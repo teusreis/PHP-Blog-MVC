@@ -6,19 +6,25 @@ use PDO;
 use Exception;
 use App\Model\User;
 use App\Library\Model;
+use CoffeeCode\Uploader\Image;
 
 class Post extends Model
 {
     private string $title;
     private string $description;
     private string $paragraph;
-    private bool $hasPhoto;
-    private string $photoPath;
+    private bool $hasPhoto = false;
+    private string|null $photoPath;
     private int $user_id;
+    private Image $upload;
+
+    private array $file;
+    private string $path;
 
     public function __construct()
     {
         $this->table = "posts";
+        $this->upload = new Image("img", "userImg");
         parent::__construct();
     }
 
@@ -96,23 +102,89 @@ class Post extends Model
         return $this;
     }
 
+    /**
+     * Get the value of hasPhoto
+     */
+    public function getHasPhoto()
+    {
+        return $this->hasPhoto;
+    }
+
+    /**
+     * Set the value of hasPhoto
+     *
+     * @return  self
+     */
+    public function setHasPhoto(bool $hasPhoto)
+    {
+        $this->hasPhoto = $hasPhoto;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of photoPath
+     */
+    public function getPhotoPath()
+    {
+        return $this->photoPath;
+    }
+
+    /**
+     * Set the value of photoPath
+     *
+     * @return  self
+     */
+    public function setPhotoPath(array $files = null, string $oldBanner = null)
+    {
+        if ((empty($files['banner']) || empty($files["banner"]['type'])) && empty($oldBanner)) {
+            $this->photoPath = null;
+            $this->setHasPhoto(false);
+            return $this;
+        }
+
+        if (empty($files["banner"]['type']) && !empty($oldBanner)) {
+            $this->photoPath = $oldBanner;
+            $this->setHasPhoto(true);
+            return $this;
+        }
+
+        $file = $files['banner'];
+
+        if (in_array($file['type'], $this->upload::isAllowed())) {
+            $photoPath = $this->upload->upload($file, pathinfo($file['name'], PATHINFO_FILENAME), 350);
+            $this->setHasPhoto(true);
+        } else {
+            $this->hasError = true;
+            $this->error["banner"] = "Image extation not allowed!";
+        }
+
+        $this->photoPath = $photoPath;
+
+        return $this;
+    }
+
     public function save(int $id = null): bool
     {
         if ($this->hasError) {
             return false;
         }
 
-        $sql = "INSERT INTO posts(title, description, paragraph, user_id)
-                VALUE(:title, :description, :paragraph, :user_id)";
+        $sql = "INSERT INTO posts(title, description, paragraph, hasPhoto, photoPath, user_id)
+                VALUE(:title, :description, :paragraph, :hasPhoto, :photoPath, :user_id)";
 
         $stmt = $this->pdo->prepare($sql);
 
-        $success = $stmt->execute([
-            ":title" => $this->title,
-            ":description" => $this->description,
-            ":paragraph" => $this->paragraph,
-            ":user_id" => $id ?? $_SESSION["user"]['id']
-        ]);
+        $id = $id ??  $_SESSION["user"]['id'];
+
+        $stmt->bindParam(":title", $this->title);
+        $stmt->bindParam(":description", $this->description);
+        $stmt->bindParam(":paragraph", $this->paragraph);
+        $stmt->bindParam(":hasPhoto", $this->hasPhoto, PDO::PARAM_BOOL);
+        $stmt->bindParam(":photoPath", $this->photoPath);
+        $stmt->bindParam(":user_id", $id);
+
+        $success = $stmt->execute();
 
         return $success;
     }
@@ -124,25 +196,25 @@ class Post extends Model
         }
 
         $sql = "UPDATE posts
-                SET title = :title, description = :description, description = :description, paragraph = :paragraph
+                SET title = :title, description = :description, paragraph = :paragraph, hasPhoto = :hasPhoto, photoPath = :photoPath, updated_at = NOW()
                 WHERE id = :id";
 
         $stmt = $this->pdo->prepare($sql);
 
-        $success = $stmt->execute([
-            ":title" => $this->title,
-            ":description" => $this->description,
-            ":paragraph" => $this->paragraph,
-            ":id" => $id
-        ]);
+        $stmt->bindParam(":title", $this->title);
+        $stmt->bindParam(":description", $this->description);
+        $stmt->bindParam(":paragraph", $this->paragraph);
+        $stmt->bindParam(":hasPhoto", $this->hasPhoto, PDO::PARAM_BOOL);
+        $stmt->bindParam(":photoPath", $this->photoPath);
+        $stmt->bindParam(":id", $id);
 
-        return $success;
+        return $stmt->execute();
     }
 
     public function find($id)
     {
 
-        $sql = "SELECT p.id, p.user_id, p.title, p.description, p.paragraph, DATE(p.created_at) as created_at, DATE(p.updated_at) updated_at, CONCAT(u.name, ' ', u.lastName) as author from posts as p
+        $sql = "SELECT p.id, p.user_id, p.title, p.hasPhoto, p.photoPath, p.description, p.paragraph, DATE(p.created_at) as created_at, DATE(p.updated_at) updated_at, CONCAT(u.name, ' ', u.lastName) as author from posts as p
                 JOIN users as u
                 ON u.id = p.user_id
                 WHERE p.id = :id
@@ -163,21 +235,26 @@ class Post extends Model
 
     public function findByTitle(string $title, int $offset = null, int $limit = null): array
     {
-        $offset = $offset ?? 1;
-        $limit = $limit ?? 100000000000;
         $title = "%" . $title . "%";
 
-        $sql = "SELECT p.id, p.user_id, p.title, p.description, p.paragraph, DATE(p.created_at) as created_at, DATE(p.updated_at) updated_at, CONCAT(u.name, ' ', u.lastName) as author from posts as p
+        $sql = "SELECT p.id, p.user_id, p.title, p.hasPhoto, p.photoPath, p.description, p.paragraph, DATE(p.created_at) as created_at, DATE(p.updated_at) updated_at, CONCAT(u.name, ' ', u.lastName) as author from posts as p
                 JOIN users as u
                 ON u.id = p.user_id
-                WHERE p.title like :title
-                ORDER BY p.created_at DESC
-                LIMIT :offset, :limit";
+                WHERE p.title like :title";
+
+        if ($offset !== null && $limit !== null) {
+            $sql .= " ORDER BY p.created_at DESC LIMIT :offset, :limit";
+        } else {
+            $sql .= " ORDER BY p.created_at DESC";
+        }
 
         $stmt = $this->pdo->prepare($sql);
 
-        $stmt->bindParam(":offset", $offset, PDO::PARAM_INT);
-        $stmt->bindParam(":limit", $limit, PDO::PARAM_INT);
+        if ($offset !== null && $limit !== null) {
+            $stmt->bindParam(":offset", $offset, PDO::PARAM_INT);
+            $stmt->bindParam(":limit", $limit, PDO::PARAM_INT);
+        }
+
         $stmt->bindParam(":title", $title);
 
         $success = $stmt->execute();
@@ -189,20 +266,17 @@ class Post extends Model
         }
     }
 
-    public function findAll(): array
+    public function findAll(int $offset = 0, int $limit = 10): array
     {
-        $start = 0;
-        $limit = 10;
-
-        $sql = "SELECT p.id, p.user_id, p.title, p.description, p.paragraph, DATE(p.created_at) as created_at, DATE(p.updated_at) updated_at, CONCAT(u.name, ' ', u.lastName) as author from posts as p
+        $sql = "SELECT p.id, p.user_id, p.title, p.hasPhoto, p.photoPath, p.description, p.paragraph, DATE(p.created_at) as created_at, DATE(p.updated_at) updated_at, CONCAT(u.name, ' ', u.lastName) as author from posts as p
                 JOIN users as u
                 ON u.id = p.user_id
                 ORDER By p.created_at DESC
-                LIMIT :start, :limit";
+                LIMIT :offset, :limit";
 
         $stmt = $this->pdo->prepare($sql);
 
-        $stmt->bindParam(":start", $start, PDO::PARAM_INT);
+        $stmt->bindParam(":offset", $offset, PDO::PARAM_INT);
         $stmt->bindParam(":limit", $limit, PDO::PARAM_INT);
 
         $success = $stmt->execute();

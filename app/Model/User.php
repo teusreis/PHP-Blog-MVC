@@ -195,6 +195,7 @@ class User extends Model
             $_SESSION['user']['name'] = $user->name;
             return true;
         } else {
+            $this->error["login"] = "invalid email or password!";
             return false;
         }
     }
@@ -263,20 +264,24 @@ class User extends Model
 
     public function posts(int $offset = null, int $limit = null): array
     {
-        $offset = $offset ?? 0;
-        $limit = $limit ?? 100000000000000000;
-
-        $sql = "SELECT p.id, p.user_id, p.title, p.description, DATE(p.created_at) as created_at, DATE(p.updated_at) updated_at, CONCAT(u.name, ' ', u.lastName) as author FROM users as u
+        $sql = "SELECT p.id, p.user_id, p.title, p.description, p.hasPhoto, p.photoPath, DATE(p.created_at) as created_at, DATE(p.updated_at) updated_at, CONCAT(u.name, ' ', u.lastName) as author FROM users as u
                 JOIN posts as p
                 ON u.id = p.user_id
-                WHERE u.id = :id
-                ORDER By p.created_at DESC
-                LiMIT :offset, :limit";
+                WHERE u.id = :id";
+
+        if ($offset !== null && $limit !== null) {
+            $sql .= " ORDER BY p.created_at DESC LIMIT :offset, :limit";
+        } else {
+            $sql .= " ORDER BY p.created_at DESC";
+        }
 
         $stmt = $this->pdo->prepare($sql);
 
-        $stmt->bindParam(":offset", $offset, PDO::PARAM_INT);
-        $stmt->bindParam(":limit", $limit, PDO::PARAM_INT);
+        if ($offset !== null && $limit !== null) {
+            $stmt->bindParam(":offset", $offset, PDO::PARAM_INT);
+            $stmt->bindParam(":limit", $limit, PDO::PARAM_INT);
+        }
+
         $stmt->bindParam(":id", $_SESSION['user']['id']);
 
         $success = $stmt->execute();

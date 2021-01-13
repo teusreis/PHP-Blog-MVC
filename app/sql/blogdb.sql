@@ -53,24 +53,16 @@ value("admin", "admin", "$2y$10$.Z6C6DbZ/m.9PCGv3v486.AoqsgLITH/0XLg/38LLVzJV1Hd
 
 insert into profiles(nickname, user_id)
 value("admin", 1);
-	
-delete from users
-where id  = 4;
 
 /* Area for the selects */
 select * from users;
 
 select * from profiles;
 
-SELECT p.id, p.user_id, p.title, p.description, p.paragraph, DATE(p.created_at) as created_at, DATE(p.updated_at) updated_at, CONCAT(u.name, ' ', u.lastName) as author from posts as p
-JOIN users as u
-ON u.id = p.user_id
-LIMIT 0, 10;
-
 select * from posts;
 
-SELECT p.id, p.user_id, p.title, p.description, p.paragraph, DATE(p.created_at) as created_at, DATE(p.updated_at) updated_at, CONCAT(u.name, ' ', u.lastName) as author from posts as p
-JOIN users as u
-ON u.id = p.user_id
-WHERE p.title like "%php%"
-LIMIT 10";
+select * from posts
+order by created_at desc
+limit 1;
+
+describe posts;
