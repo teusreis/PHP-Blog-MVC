@@ -46,7 +46,7 @@ class FakerController extends Controller
     public function posts($data)
     {
 
-        if($data["id"] == null || $data["id"] == "null") $data["id"] = $_SESSION["user"]["id"];
+        if($data["id"] == null || $data["id"] == "null") $data["id"] = getUserId();
 
         $qtd = $data["qtd"] ?? 5;
         

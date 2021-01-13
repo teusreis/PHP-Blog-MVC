@@ -282,7 +282,8 @@ class User extends Model
             $stmt->bindParam(":limit", $limit, PDO::PARAM_INT);
         }
 
-        $stmt->bindParam(":id", $_SESSION['user']['id']);
+        $id = getUserId();
+        $stmt->bindParam(":id", $id);
 
         $success = $stmt->execute();
 

@@ -152,7 +152,7 @@ class Post extends Model
         $file = $files['banner'];
 
         if (in_array($file['type'], $this->upload::isAllowed())) {
-            $photoPath = $this->upload->upload($file, pathinfo($file['name'], PATHINFO_FILENAME), 350);
+            $photoPath = $this->upload->upload($file, pathinfo($file['name'], PATHINFO_FILENAME), 500);
             $this->setHasPhoto(true);
         } else {
             $this->hasError = true;
@@ -175,7 +175,7 @@ class Post extends Model
 
         $stmt = $this->pdo->prepare($sql);
 
-        $id = $id ??  $_SESSION["user"]['id'];
+        $id = $id ??  getUserId();
 
         $stmt->bindParam(":title", $this->title);
         $stmt->bindParam(":description", $this->description);

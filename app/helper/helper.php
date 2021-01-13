@@ -1,5 +1,6 @@
 <?php
 
+// Debuging functions
 function d($data): void
 {
     echo "<pre>";
@@ -15,6 +16,7 @@ function dd($data): void
     die();
 }
 
+// Auth functions
 function isLogin(): bool
 {
     if (isset($_SESSION['user'])) {
@@ -26,13 +28,19 @@ function isLogin(): bool
 
 function canModify(int $id): bool
 {
-    if (isLogin() && $id == $_SESSION['user']['id']) {
+    if (isLogin() && $id == getUserId()) {
         return true;
     } else {
         return false;
     }
 }
 
+function getUserId(): int
+{
+    return $_SESSION['user']['id'];
+}
+
+// URL and Assets functions
 function url(string $complement = null): string
 {
     if ($complement) {
