@@ -105,12 +105,11 @@ class PostController extends Controller
         ]);
     }
 
-    public function edit($data)
+    public function update($data)
     {
         $id = $data["id"];
 
         if (isset($_POST['post'])) {
-
 
             $post = $this->post->findByPk($_POST["id"]);
 

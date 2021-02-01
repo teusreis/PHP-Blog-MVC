@@ -1,6 +1,6 @@
 <h2 class="title">New Post</h2>
 
-<form id="post" action="<?= isset($post) ? url("post/edit") : url("post/create") ?>" method="POST" enctype="multipart/form-data">
+<form id="post" action="<?= isset($post) ? url("post/update") : url("post/create") ?>" method="POST" enctype="multipart/form-data">
 
     <?php if (isset($id)) : ?>
         <input type="hidden" name="id" value="<?= $id ?>">

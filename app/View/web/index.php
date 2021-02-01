@@ -14,7 +14,7 @@
     <?php foreach ($posts as $i => $post) : ?>
         <div class="post">
             <div class="post_banner">
-                <img src="<?= loadImg($post->photoPath ?? "img/userImg/bannerTest.png"); ?>" alt="">
+                <img src="<?= loadImg($post->photoPath ?? "img/blogImg/defaultBanner.png"); ?>" alt="">
             </div>
             <div class="post_info">
                 <h3><?= $post->title ?></h3>

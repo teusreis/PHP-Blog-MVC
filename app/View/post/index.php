@@ -23,7 +23,7 @@
 
             <div class="post">
                 <div class="post_banner">
-                    <img src="<?= $post->hasPhoto ? loadImg($post->photoPath) : loadImg("img/userImg/bannerTest.png") ?>" alt="">
+                    <img src="<?= $post->hasPhoto ? loadImg($post->photoPath) : loadImg("img/blogImg/defaultBanner.png") ?>" alt="">
                 </div>
                 <div class="post_info">
                     <h3><?= $post->title ?></h3>
@@ -54,7 +54,7 @@
                             Delete
                         </button>
 
-                        <a href="<?= url("post/edit/$post->id") ?>">
+                        <a href="<?= url("post/update/$post->id") ?>">
                             <button class="editPost" data-id="<?= $post->id ?>" data-title="<?= $post->title ?>">
                                 <i class="fas fa-edit"></i>
                                 Update

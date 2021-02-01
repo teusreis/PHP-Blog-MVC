@@ -41,8 +41,8 @@ $router->get("/search", "PostController::search");
 $router->get("/show/{id}", "PostController::show");
 $router->get("/create", "PostController::create");
 $router->post("/create", "PostController::create");
-$router->get("/edit/{id}", "PostController::edit");
-$router->post("/edit", "PostController::edit");
+$router->get("/update/{id}", "PostController::update");
+$router->post("/update", "PostController::update");
 $router->delete("/delete", "PostController::delete");
 
 /**
