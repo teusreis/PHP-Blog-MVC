@@ -12,8 +12,6 @@ create table users(
     updated_at timestamp default null
 );
 
-describe users;
-
 create table profiles(
 	id int primary key auto_increment,
     nickname varchar(50) unique not null,
@@ -38,31 +36,8 @@ create table posts(
     updated_at timestamp default null
 );
 
-SELECT *, CONCAT(u.name, " ", u.lastName) as author FROM users as u
-JOIN posts as p
-ON u.id = p.user_id
-WHERE u.id = 1;
-
-SELECT * from posts where id = 1 LIMIT 1;
-
-alter table users
-modify password varchar(255) not null;
-
-insert into users(name, lastName, password, email)
+insert into users(name, lastName, password, email) -- password = 1234
 value("admin", "admin", "$2y$10$.Z6C6DbZ/m.9PCGv3v486.AoqsgLITH/0XLg/38LLVzJV1HdcONRq", "admin@admin.com");
 
 insert into profiles(nickname, user_id)
 value("admin", 1);
-
-/* Area for the selects */
-select * from users;
-
-select * from profiles;
-
-select * from posts;
-
-select * from posts
-order by created_at desc
-limit 1;
-
-describe posts;
