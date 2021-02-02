@@ -5,7 +5,7 @@
 ## Description
 ---
 
-This project is blog, built in MVC design pattern, where user can read any post and even create an account to create their own posts!
+This project is blog, built with MVC design pattern, where users can read any post and even create an account to create their own posts!
 
 ## Main Features
 ---
